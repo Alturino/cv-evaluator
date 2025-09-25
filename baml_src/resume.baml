@@ -11,14 +11,23 @@ class Experience {
   location string
   start_date string
   end_date string
+  duration_in_year float
   description string
   responsibilities string[]
+}
+
+class Project{
+  name string
+  description string
+  technologies string[]
+  tools string[]
+  duration_in_year float
 }
 
 class Resume {
   name string
   address string
-  projects string[]
+  projects Project[]
   educations Education[]
   experience Experience[]
   skills string[]
@@ -26,7 +35,7 @@ class Resume {
 
 // Create a function to extract the resume from a string.
 function ExtractResume(resume: string) -> Resume {
-  client "google-ai/gemini-2.5-flash"
+  client CustomGemini
   prompt #"
     Extract from this content:
     {{ resume }}

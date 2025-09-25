@@ -19,11 +19,23 @@ type_map = {
     "types.Education": types.Education,
     "stream_types.Education": stream_types.Education,
 
+    "types.EvaluationResult": types.EvaluationResult,
+    "stream_types.EvaluationResult": stream_types.EvaluationResult,
+
     "types.Experience": types.Experience,
     "stream_types.Experience": stream_types.Experience,
 
+    "types.JobDescription": types.JobDescription,
+    "stream_types.JobDescription": stream_types.JobDescription,
+
+    "types.Project": types.Project,
+    "stream_types.Project": stream_types.Project,
+
     "types.Resume": types.Resume,
     "stream_types.Resume": stream_types.Resume,
+
+    "types.SkillResult": types.SkillResult,
+    "stream_types.SkillResult": stream_types.SkillResult,
 
 
 }

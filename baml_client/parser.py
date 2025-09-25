@@ -24,6 +24,18 @@ class LlmResponseParser:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
+    def EvaluateResume(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> types.EvaluationResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateResume", llm_response=llm_response, mode="request")
+        return typing.cast(types.EvaluationResult, result)
+
+    def ExtractJobDescription(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> types.JobDescription:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractJobDescription", llm_response=llm_response, mode="request")
+        return typing.cast(types.JobDescription, result)
+
     def ExtractResume(
         self, llm_response: str, baml_options: BamlCallOptions = {},
     ) -> types.Resume:
@@ -37,6 +49,18 @@ class LlmStreamParser:
 
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
+
+    def EvaluateResume(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> stream_types.EvaluationResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateResume", llm_response=llm_response, mode="stream")
+        return typing.cast(stream_types.EvaluationResult, result)
+
+    def ExtractJobDescription(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> stream_types.JobDescription:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractJobDescription", llm_response=llm_response, mode="stream")
+        return typing.cast(stream_types.JobDescription, result)
 
     def ExtractResume(
         self, llm_response: str, baml_options: BamlCallOptions = {},

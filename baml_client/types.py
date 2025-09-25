@@ -41,7 +41,7 @@ def all_succeeded(checks: typing.Dict[CheckName, Check]) -> bool:
 # #########################################################################
 
 # #########################################################################
-# Generated classes (3)
+# Generated classes (7)
 # #########################################################################
 
 class Education(BaseModel):
@@ -49,22 +49,52 @@ class Education(BaseModel):
     gpa: float
     max_gpa: float
 
+class EvaluationResult(BaseModel):
+    cv_match_rate: float
+    cv_feedback: str
+    project_score: float
+    project_feedback: str
+    overall_summary: str
+    technical_skills_match: "SkillResult"
+    experience_level: "SkillResult"
+    project_match: "SkillResult"
+    relevant_achievements: "SkillResult"
+    cultural_fit: "SkillResult"
+
 class Experience(BaseModel):
     company: str
     position: str
     location: str
     start_date: str
     end_date: str
+    duration_in_year: float
     description: str
     responsibilities: typing.List[str]
+
+class JobDescription(BaseModel):
+    description: str
+    qualifications: typing.List[str]
+    tools: typing.List[str]
+    real_work_examples: typing.List[str]
+
+class Project(BaseModel):
+    name: str
+    description: str
+    technologies: typing.List[str]
+    tools: typing.List[str]
+    duration_in_year: float
 
 class Resume(BaseModel):
     name: str
     address: str
-    projects: typing.List[str]
+    projects: typing.List["Project"]
     educations: typing.List["Education"]
     experience: typing.List["Experience"]
     skills: typing.List[str]
+
+class SkillResult(BaseModel):
+    score: int
+    feedback: str
 
 # #########################################################################
 # Generated type aliases (0)

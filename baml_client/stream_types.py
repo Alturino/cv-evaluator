@@ -23,7 +23,7 @@ class StreamState(BaseModel, typing.Generic[StreamStateValueT]):
     value: StreamStateValueT
     state: typing_extensions.Literal["Pending", "Incomplete", "Complete"]
 # #########################################################################
-# Generated classes (3)
+# Generated classes (7)
 # #########################################################################
 
 class Education(BaseModel):
@@ -31,22 +31,52 @@ class Education(BaseModel):
     gpa: typing.Optional[float] = None
     max_gpa: typing.Optional[float] = None
 
+class EvaluationResult(BaseModel):
+    cv_match_rate: typing.Optional[float] = None
+    cv_feedback: typing.Optional[str] = None
+    project_score: typing.Optional[float] = None
+    project_feedback: typing.Optional[str] = None
+    overall_summary: typing.Optional[str] = None
+    technical_skills_match: typing.Optional["SkillResult"] = None
+    experience_level: typing.Optional["SkillResult"] = None
+    project_match: typing.Optional["SkillResult"] = None
+    relevant_achievements: typing.Optional["SkillResult"] = None
+    cultural_fit: typing.Optional["SkillResult"] = None
+
 class Experience(BaseModel):
     company: typing.Optional[str] = None
     position: typing.Optional[str] = None
     location: typing.Optional[str] = None
     start_date: typing.Optional[str] = None
     end_date: typing.Optional[str] = None
+    duration_in_year: typing.Optional[float] = None
     description: typing.Optional[str] = None
     responsibilities: typing.List[str]
+
+class JobDescription(BaseModel):
+    description: typing.Optional[str] = None
+    qualifications: typing.List[str]
+    tools: typing.List[str]
+    real_work_examples: typing.List[str]
+
+class Project(BaseModel):
+    name: typing.Optional[str] = None
+    description: typing.Optional[str] = None
+    technologies: typing.List[str]
+    tools: typing.List[str]
+    duration_in_year: typing.Optional[float] = None
 
 class Resume(BaseModel):
     name: typing.Optional[str] = None
     address: typing.Optional[str] = None
-    projects: typing.List[str]
+    projects: typing.List["Project"]
     educations: typing.List["Education"]
     experience: typing.List["Experience"]
     skills: typing.List[str]
+
+class SkillResult(BaseModel):
+    score: typing.Optional[int] = None
+    feedback: typing.Optional[str] = None
 
 # #########################################################################
 # Generated type aliases (0)

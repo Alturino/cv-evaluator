@@ -20,7 +20,7 @@ from .globals import DO_NOT_USE_DIRECTLY_UNLESS_YOU_KNOW_WHAT_YOURE_DOING_RUNTIM
 class TypeBuilder(type_builder.TypeBuilder):
     def __init__(self):
         super().__init__(classes=set(
-          ["Education","Experience","Resume",]
+          ["Education","EvaluationResult","Experience","JobDescription","Project","Resume","SkillResult",]
         ), enums=set(
           []
         ), runtime=DO_NOT_USE_DIRECTLY_UNLESS_YOU_KNOW_WHAT_YOURE_DOING_RUNTIME)
@@ -31,7 +31,7 @@ class TypeBuilder(type_builder.TypeBuilder):
 
 
     # #########################################################################
-    # Generated classes 3
+    # Generated classes 7
     # #########################################################################
 
     @property
@@ -39,12 +39,28 @@ class TypeBuilder(type_builder.TypeBuilder):
         return EducationViewer(self)
 
     @property
+    def EvaluationResult(self) -> "EvaluationResultViewer":
+        return EvaluationResultViewer(self)
+
+    @property
     def Experience(self) -> "ExperienceViewer":
         return ExperienceViewer(self)
 
     @property
+    def JobDescription(self) -> "JobDescriptionViewer":
+        return JobDescriptionViewer(self)
+
+    @property
+    def Project(self) -> "ProjectViewer":
+        return ProjectViewer(self)
+
+    @property
     def Resume(self) -> "ResumeViewer":
         return ResumeViewer(self)
+
+    @property
+    def SkillResult(self) -> "SkillResultViewer":
+        return SkillResultViewer(self)
 
 
 
@@ -54,7 +70,7 @@ class TypeBuilder(type_builder.TypeBuilder):
 
 
 # #########################################################################
-# Generated classes 3
+# Generated classes 7
 # #########################################################################
 
 class EducationAst:
@@ -104,11 +120,86 @@ class EducationProperties:
     
 
 
+class EvaluationResultAst:
+    def __init__(self, tb: type_builder.TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("EvaluationResult")
+        self._properties: typing.Set[str] = set([  "cv_match_rate",  "cv_feedback",  "project_score",  "project_feedback",  "overall_summary",  "technical_skills_match",  "experience_level",  "project_match",  "relevant_achievements",  "cultural_fit",  ])
+        self._props = EvaluationResultProperties(self._bldr, self._properties)
+
+    def type(self) -> baml_py.FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "EvaluationResultProperties":
+        return self._props
+
+
+class EvaluationResultViewer(EvaluationResultAst):
+    def __init__(self, tb: type_builder.TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, type_builder.ClassPropertyViewer]]:
+        return [(name, type_builder.ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+    
+
+
+class EvaluationResultProperties:
+    def __init__(self, bldr: baml_py.ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties # type: ignore (we know how to use this private attribute) # noqa: F821
+
+    
+    
+    @property
+    def cv_match_rate(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("cv_match_rate"))
+    
+    @property
+    def cv_feedback(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("cv_feedback"))
+    
+    @property
+    def project_score(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("project_score"))
+    
+    @property
+    def project_feedback(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("project_feedback"))
+    
+    @property
+    def overall_summary(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("overall_summary"))
+    
+    @property
+    def technical_skills_match(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("technical_skills_match"))
+    
+    @property
+    def experience_level(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("experience_level"))
+    
+    @property
+    def project_match(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("project_match"))
+    
+    @property
+    def relevant_achievements(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("relevant_achievements"))
+    
+    @property
+    def cultural_fit(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("cultural_fit"))
+    
+    
+
+
 class ExperienceAst:
     def __init__(self, tb: type_builder.TypeBuilder):
         _tb = tb._tb # type: ignore (we know how to use this private attribute)
         self._bldr = _tb.class_("Experience")
-        self._properties: typing.Set[str] = set([  "company",  "position",  "location",  "start_date",  "end_date",  "description",  "responsibilities",  ])
+        self._properties: typing.Set[str] = set([  "company",  "position",  "location",  "start_date",  "end_date",  "duration_in_year",  "description",  "responsibilities",  ])
         self._props = ExperienceProperties(self._bldr, self._properties)
 
     def type(self) -> baml_py.FieldType:
@@ -157,12 +248,122 @@ class ExperienceProperties:
         return type_builder.ClassPropertyViewer(self.__bldr.property("end_date"))
     
     @property
+    def duration_in_year(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("duration_in_year"))
+    
+    @property
     def description(self) -> type_builder.ClassPropertyViewer:
         return type_builder.ClassPropertyViewer(self.__bldr.property("description"))
     
     @property
     def responsibilities(self) -> type_builder.ClassPropertyViewer:
         return type_builder.ClassPropertyViewer(self.__bldr.property("responsibilities"))
+    
+    
+
+
+class JobDescriptionAst:
+    def __init__(self, tb: type_builder.TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("JobDescription")
+        self._properties: typing.Set[str] = set([  "description",  "qualifications",  "tools",  "real_work_examples",  ])
+        self._props = JobDescriptionProperties(self._bldr, self._properties)
+
+    def type(self) -> baml_py.FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "JobDescriptionProperties":
+        return self._props
+
+
+class JobDescriptionViewer(JobDescriptionAst):
+    def __init__(self, tb: type_builder.TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, type_builder.ClassPropertyViewer]]:
+        return [(name, type_builder.ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+    
+
+
+class JobDescriptionProperties:
+    def __init__(self, bldr: baml_py.ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties # type: ignore (we know how to use this private attribute) # noqa: F821
+
+    
+    
+    @property
+    def description(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("description"))
+    
+    @property
+    def qualifications(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("qualifications"))
+    
+    @property
+    def tools(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("tools"))
+    
+    @property
+    def real_work_examples(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("real_work_examples"))
+    
+    
+
+
+class ProjectAst:
+    def __init__(self, tb: type_builder.TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("Project")
+        self._properties: typing.Set[str] = set([  "name",  "description",  "technologies",  "tools",  "duration_in_year",  ])
+        self._props = ProjectProperties(self._bldr, self._properties)
+
+    def type(self) -> baml_py.FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "ProjectProperties":
+        return self._props
+
+
+class ProjectViewer(ProjectAst):
+    def __init__(self, tb: type_builder.TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, type_builder.ClassPropertyViewer]]:
+        return [(name, type_builder.ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+    
+
+
+class ProjectProperties:
+    def __init__(self, bldr: baml_py.ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties # type: ignore (we know how to use this private attribute) # noqa: F821
+
+    
+    
+    @property
+    def name(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("name"))
+    
+    @property
+    def description(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("description"))
+    
+    @property
+    def technologies(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("technologies"))
+    
+    @property
+    def tools(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("tools"))
+    
+    @property
+    def duration_in_year(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("duration_in_year"))
     
     
 
@@ -222,6 +423,49 @@ class ResumeProperties:
     @property
     def skills(self) -> type_builder.ClassPropertyViewer:
         return type_builder.ClassPropertyViewer(self.__bldr.property("skills"))
+    
+    
+
+
+class SkillResultAst:
+    def __init__(self, tb: type_builder.TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("SkillResult")
+        self._properties: typing.Set[str] = set([  "score",  "feedback",  ])
+        self._props = SkillResultProperties(self._bldr, self._properties)
+
+    def type(self) -> baml_py.FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "SkillResultProperties":
+        return self._props
+
+
+class SkillResultViewer(SkillResultAst):
+    def __init__(self, tb: type_builder.TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, type_builder.ClassPropertyViewer]]:
+        return [(name, type_builder.ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+    
+
+
+class SkillResultProperties:
+    def __init__(self, bldr: baml_py.ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties # type: ignore (we know how to use this private attribute) # noqa: F821
+
+    
+    
+    @property
+    def score(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("score"))
+    
+    @property
+    def feedback(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("feedback"))
     
     
 
