@@ -1,0 +1,134 @@
+{
+  "name": "Ricky Alturino",
+  "address": "Palembang, Indonesia",
+  "projects": [
+    {
+      "name": "Hedonify",
+      "description": "Scalable ecommerce microservices-based backend system, implemented a queue and batch processing to handle competing orders efficiently.",
+      "technologies": [
+        "Go",
+        "Docker",
+        "Microservice",
+        "PostgreSQL",
+        "Redis",
+        "OpenTelemetry"
+      ],
+      "tools": [],
+      "duration_in_year": 0.92
+    },
+    {
+      "name": "Open Music API",
+      "description": "Music backend server for dicoding course.",
+      "technologies": [
+        "JavaScript (Hapi)",
+        "Java (Spring Boot)",
+        "PostgreSQL",
+        "RabbitMQ"
+      ],
+      "tools": [],
+      "duration_in_year": 0.5
+    },
+    {
+      "name": "Learn Kubernetes",
+      "description": "Learn kubernetes deployment and database replication of MongoDB, PostgreSQL, and Redis by using Docker Compose and Kubernetes StatefulSet.",
+      "technologies": [
+        "MongoDB",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "Kubernetes"
+      ],
+      "tools": [],
+      "duration_in_year": 0.08
+    }
+  ],
+  "educations": [
+    {
+      "school": "Sriwijaya University",
+      "gpa": 3.6,
+      "max_gpa": 4
+    }
+  ],
+  "experience": [
+    {
+      "company": "Brick",
+      "position": "L1 Engineer",
+      "location": "(Remote) Jakarta, Indonesia",
+      "start_date": "May 2024",
+      "end_date": "May 2025",
+      "duration_in_year": 1.08,
+      "description": "",
+      "responsibilities": [
+        "Provide cross-divisional support both in data updates and data retrieval.",
+        "Developed, maintained applications/services."
+      ]
+    },
+    {
+      "company": "Campaign",
+      "position": "Android Developer Intern",
+      "location": "(Remote) Jakarta, Indonesia",
+      "start_date": "January 2023",
+      "end_date": "July 2023",
+      "duration_in_year": 0.58,
+      "description": "",
+      "responsibilities": [
+        "Collaborated with teams to ensure features are meeting expectations.",
+        "Developed, maintained, and tested new features."
+      ]
+    },
+    {
+      "company": "Indosat Ooredoo Hutchison",
+      "position": "Android Developer Intern",
+      "location": "(Remote) Jakarta, Indonesia",
+      "start_date": "May 2022",
+      "end_date": "June 2022",
+      "duration_in_year": 0.17,
+      "description": "",
+      "responsibilities": [
+        "Lead Mobile Development Team to develop Hy.Ponics application.",
+        "Researched, developed, and tested features of Hy.Ponics application."
+      ]
+    }
+  ],
+  "skills": [
+    "Go",
+    "Java",
+    "Kotlin",
+    "TypeScript",
+    "Python",
+    "OOP",
+    "Design Pattern",
+    "TDD",
+    "Gin",
+    "Fiber",
+    "Echo",
+    "Spring Boot",
+    "Express",
+    "Hapi",
+    "NestJS",
+    "React",
+    "Github Actions",
+    "Circle CI",
+    "PostgreSQL",
+    "MySQL",
+    "MongoDB",
+    "Redis",
+    "Memcached",
+    "Firebase",
+    "RabbitMQ",
+    "Kafka",
+    "NATS",
+    "Firebase Cloud Messaging",
+    "Git",
+    "Linux",
+    "Docker",
+    "Kubernetes",
+    "k6",
+    "Testcontainers",
+    "Prometheus",
+    "Grafana",
+    "Nginx",
+    "AWS",
+    "GCP"
+  ]
+}

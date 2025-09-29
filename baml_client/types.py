@@ -41,25 +41,21 @@ def all_succeeded(checks: typing.Dict[CheckName, Check]) -> bool:
 # #########################################################################
 
 # #########################################################################
-# Generated classes (7)
+# Generated classes (8)
 # #########################################################################
+
+class CVExtractionResult(BaseModel):
+    name: str
+    address: str
+    projects: typing.List["Project"]
+    educations: typing.List["Education"]
+    experience: typing.List["Experience"]
+    skills: typing.List[str]
 
 class Education(BaseModel):
     school: str
     gpa: float
     max_gpa: float
-
-class EvaluationResult(BaseModel):
-    cv_match_rate: float
-    cv_feedback: str
-    project_score: float
-    project_feedback: str
-    overall_summary: str
-    technical_skills_match: "SkillResult"
-    experience_level: "SkillResult"
-    project_match: "SkillResult"
-    relevant_achievements: "SkillResult"
-    cultural_fit: "SkillResult"
 
 class Experience(BaseModel):
     company: str
@@ -77,6 +73,18 @@ class JobDescription(BaseModel):
     tools: typing.List[str]
     real_work_examples: typing.List[str]
 
+class OverallResult(BaseModel):
+    cv_match_rate: float
+    cv_feedback: str
+    project_score: float
+    project_feedback: str
+    overall_summary: str
+    technical_skills_match: "SkillResult"
+    experience_level: "SkillResult"
+    project_match: "SkillResult"
+    relevant_achievements: "SkillResult"
+    cultural_fit: "SkillResult"
+
 class Project(BaseModel):
     name: str
     description: str
@@ -84,13 +92,14 @@ class Project(BaseModel):
     tools: typing.List[str]
     duration_in_year: float
 
-class Resume(BaseModel):
-    name: str
-    address: str
-    projects: typing.List["Project"]
-    educations: typing.List["Education"]
-    experience: typing.List["Experience"]
-    skills: typing.List[str]
+class ProjectEvaluationResult(BaseModel):
+    overall: float
+    correctness: float
+    code_quality: float
+    resilience: float
+    documentation: float
+    creativity_and_bonus: float
+    feedback: str
 
 class SkillResult(BaseModel):
     score: int

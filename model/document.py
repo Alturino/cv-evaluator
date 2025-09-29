@@ -1,21 +1,21 @@
 import enum
 from datetime import datetime
 
-from pydantic import UUID4, Base64Bytes
+from pydantic import UUID4
 from sqlmodel import Column, Enum, Field, SQLModel
 
 
 class DocumentStatus(enum.Enum):
     queued = "queued"
-    processing = "processing"
     finished = "finished"
 
 
 class Document(SQLModel, table=True):
     id: UUID4 = Field(default=None, primary_key=True)
-    name: str = Field(default=None, index=True)
-    content: Base64Bytes = Field(default=None, index=False)
-    path: str = Field(default=None, index=False)
+    cv_filename: str = Field(default=None, index=True)
+    cv_path: str = Field(default=None, index=False)
+    project_filename: str = Field(default=None, index=True)
+    project_path: str = Field(default=None, index=False)
     status: DocumentStatus = Field(
         default=DocumentStatus.queued, sa_column=Column(Enum(DocumentStatus))
     )

@@ -24,7 +24,7 @@ class Project{
   duration_in_year float
 }
 
-class Resume {
+class CVExtractionResult {
   name string
   address string
   projects Project[]
@@ -34,21 +34,21 @@ class Resume {
 }
 
 // Create a function to extract the resume from a string.
-function ExtractResume(resume: string) -> Resume {
+function ExtractCV(cv: string) -> CVExtractionResult {
   client CustomGemini
   prompt #"
     Extract from this content:
-    {{ resume }}
+    {{ cv }}
 
     {{ ctx.output_format }}
   "#
 }
 
 // Test the function with a sample resume. Open the VSCode playground to run this.
-test ricky_alturino_resume {
-  functions [ExtractResume]
+test ricky_alturino_cv {
+  functions [ExtractCV]
   args {
-    resume #"
+    cv #"
       Ricky Alturino
       Software Engineer
       Palembang, Indonesia | +6285156906761 | rickyalturino001@gmail.com | LinkedIn | Github

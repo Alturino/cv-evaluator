@@ -88,20 +88,48 @@ class BamlSyncClient:
     def parse_stream(self):
       return self.__llm_stream_parser
     
-    def EvaluateResume(self, resume: types.Resume,job_description: types.JobDescription,
+    def EvaluateAll(self, cv: types.CVExtractionResult,job_description: types.JobDescription,project_evaluation: types.ProjectEvaluationResult,
         baml_options: BamlCallOptions = {},
-    ) -> types.EvaluationResult:
+    ) -> types.OverallResult:
         # Check if on_tick is provided
         if 'on_tick' in baml_options:
-            stream = self.stream.EvaluateResume(resume=resume,job_description=job_description,
+            stream = self.stream.EvaluateAll(cv=cv,job_description=job_description,project_evaluation=project_evaluation,
                 baml_options=baml_options)
             return stream.get_final_response()
         else:
             # Original non-streaming code
-            result = self.__options.merge_options(baml_options).call_function_sync(function_name="EvaluateResume", args={
-                "resume": resume,"job_description": job_description,
+            result = self.__options.merge_options(baml_options).call_function_sync(function_name="EvaluateAll", args={
+                "cv": cv,"job_description": job_description,"project_evaluation": project_evaluation,
             })
-            return typing.cast(types.EvaluationResult, result.cast_to(types, types, stream_types, False, __runtime__))
+            return typing.cast(types.OverallResult, result.cast_to(types, types, stream_types, False, __runtime__))
+    def EvaluateProject(self, project: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.ProjectEvaluationResult:
+        # Check if on_tick is provided
+        if 'on_tick' in baml_options:
+            stream = self.stream.EvaluateProject(project=project,
+                baml_options=baml_options)
+            return stream.get_final_response()
+        else:
+            # Original non-streaming code
+            result = self.__options.merge_options(baml_options).call_function_sync(function_name="EvaluateProject", args={
+                "project": project,
+            })
+            return typing.cast(types.ProjectEvaluationResult, result.cast_to(types, types, stream_types, False, __runtime__))
+    def ExtractCV(self, cv: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.CVExtractionResult:
+        # Check if on_tick is provided
+        if 'on_tick' in baml_options:
+            stream = self.stream.ExtractCV(cv=cv,
+                baml_options=baml_options)
+            return stream.get_final_response()
+        else:
+            # Original non-streaming code
+            result = self.__options.merge_options(baml_options).call_function_sync(function_name="ExtractCV", args={
+                "cv": cv,
+            })
+            return typing.cast(types.CVExtractionResult, result.cast_to(types, types, stream_types, False, __runtime__))
     def ExtractJobDescription(self, job: str,
         baml_options: BamlCallOptions = {},
     ) -> types.JobDescription:
@@ -116,20 +144,6 @@ class BamlSyncClient:
                 "job": job,
             })
             return typing.cast(types.JobDescription, result.cast_to(types, types, stream_types, False, __runtime__))
-    def ExtractResume(self, resume: str,
-        baml_options: BamlCallOptions = {},
-    ) -> types.Resume:
-        # Check if on_tick is provided
-        if 'on_tick' in baml_options:
-            stream = self.stream.ExtractResume(resume=resume,
-                baml_options=baml_options)
-            return stream.get_final_response()
-        else:
-            # Original non-streaming code
-            result = self.__options.merge_options(baml_options).call_function_sync(function_name="ExtractResume", args={
-                "resume": resume,
-            })
-            return typing.cast(types.Resume, result.cast_to(types, types, stream_types, False, __runtime__))
     
 
 
@@ -139,16 +153,40 @@ class BamlStreamClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def EvaluateResume(self, resume: types.Resume,job_description: types.JobDescription,
+    def EvaluateAll(self, cv: types.CVExtractionResult,job_description: types.JobDescription,project_evaluation: types.ProjectEvaluationResult,
         baml_options: BamlCallOptions = {},
-    ) -> baml_py.BamlSyncStream[stream_types.EvaluationResult, types.EvaluationResult]:
-        ctx, result = self.__options.merge_options(baml_options).create_sync_stream(function_name="EvaluateResume", args={
-            "resume": resume,"job_description": job_description,
+    ) -> baml_py.BamlSyncStream[stream_types.OverallResult, types.OverallResult]:
+        ctx, result = self.__options.merge_options(baml_options).create_sync_stream(function_name="EvaluateAll", args={
+            "cv": cv,"job_description": job_description,"project_evaluation": project_evaluation,
         })
-        return baml_py.BamlSyncStream[stream_types.EvaluationResult, types.EvaluationResult](
+        return baml_py.BamlSyncStream[stream_types.OverallResult, types.OverallResult](
           result,
-          lambda x: typing.cast(stream_types.EvaluationResult, x.cast_to(types, types, stream_types, True, __runtime__)),
-          lambda x: typing.cast(types.EvaluationResult, x.cast_to(types, types, stream_types, False, __runtime__)),
+          lambda x: typing.cast(stream_types.OverallResult, x.cast_to(types, types, stream_types, True, __runtime__)),
+          lambda x: typing.cast(types.OverallResult, x.cast_to(types, types, stream_types, False, __runtime__)),
+          ctx,
+        )
+    def EvaluateProject(self, project: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[stream_types.ProjectEvaluationResult, types.ProjectEvaluationResult]:
+        ctx, result = self.__options.merge_options(baml_options).create_sync_stream(function_name="EvaluateProject", args={
+            "project": project,
+        })
+        return baml_py.BamlSyncStream[stream_types.ProjectEvaluationResult, types.ProjectEvaluationResult](
+          result,
+          lambda x: typing.cast(stream_types.ProjectEvaluationResult, x.cast_to(types, types, stream_types, True, __runtime__)),
+          lambda x: typing.cast(types.ProjectEvaluationResult, x.cast_to(types, types, stream_types, False, __runtime__)),
+          ctx,
+        )
+    def ExtractCV(self, cv: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[stream_types.CVExtractionResult, types.CVExtractionResult]:
+        ctx, result = self.__options.merge_options(baml_options).create_sync_stream(function_name="ExtractCV", args={
+            "cv": cv,
+        })
+        return baml_py.BamlSyncStream[stream_types.CVExtractionResult, types.CVExtractionResult](
+          result,
+          lambda x: typing.cast(stream_types.CVExtractionResult, x.cast_to(types, types, stream_types, True, __runtime__)),
+          lambda x: typing.cast(types.CVExtractionResult, x.cast_to(types, types, stream_types, False, __runtime__)),
           ctx,
         )
     def ExtractJobDescription(self, job: str,
@@ -163,18 +201,6 @@ class BamlStreamClient:
           lambda x: typing.cast(types.JobDescription, x.cast_to(types, types, stream_types, False, __runtime__)),
           ctx,
         )
-    def ExtractResume(self, resume: str,
-        baml_options: BamlCallOptions = {},
-    ) -> baml_py.BamlSyncStream[stream_types.Resume, types.Resume]:
-        ctx, result = self.__options.merge_options(baml_options).create_sync_stream(function_name="ExtractResume", args={
-            "resume": resume,
-        })
-        return baml_py.BamlSyncStream[stream_types.Resume, types.Resume](
-          result,
-          lambda x: typing.cast(stream_types.Resume, x.cast_to(types, types, stream_types, True, __runtime__)),
-          lambda x: typing.cast(types.Resume, x.cast_to(types, types, stream_types, False, __runtime__)),
-          ctx,
-        )
     
 
 class BamlHttpRequestClient:
@@ -183,11 +209,25 @@ class BamlHttpRequestClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def EvaluateResume(self, resume: types.Resume,job_description: types.JobDescription,
+    def EvaluateAll(self, cv: types.CVExtractionResult,job_description: types.JobDescription,project_evaluation: types.ProjectEvaluationResult,
         baml_options: BamlCallOptions = {},
     ) -> baml_py.baml_py.HTTPRequest:
-        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateResume", args={
-            "resume": resume,"job_description": job_description,
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateAll", args={
+            "cv": cv,"job_description": job_description,"project_evaluation": project_evaluation,
+        }, mode="request")
+        return result
+    def EvaluateProject(self, project: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateProject", args={
+            "project": project,
+        }, mode="request")
+        return result
+    def ExtractCV(self, cv: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractCV", args={
+            "cv": cv,
         }, mode="request")
         return result
     def ExtractJobDescription(self, job: str,
@@ -195,13 +235,6 @@ class BamlHttpRequestClient:
     ) -> baml_py.baml_py.HTTPRequest:
         result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractJobDescription", args={
             "job": job,
-        }, mode="request")
-        return result
-    def ExtractResume(self, resume: str,
-        baml_options: BamlCallOptions = {},
-    ) -> baml_py.baml_py.HTTPRequest:
-        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractResume", args={
-            "resume": resume,
         }, mode="request")
         return result
     
@@ -212,11 +245,25 @@ class BamlHttpStreamRequestClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def EvaluateResume(self, resume: types.Resume,job_description: types.JobDescription,
+    def EvaluateAll(self, cv: types.CVExtractionResult,job_description: types.JobDescription,project_evaluation: types.ProjectEvaluationResult,
         baml_options: BamlCallOptions = {},
     ) -> baml_py.baml_py.HTTPRequest:
-        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateResume", args={
-            "resume": resume,"job_description": job_description,
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateAll", args={
+            "cv": cv,"job_description": job_description,"project_evaluation": project_evaluation,
+        }, mode="stream")
+        return result
+    def EvaluateProject(self, project: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="EvaluateProject", args={
+            "project": project,
+        }, mode="stream")
+        return result
+    def ExtractCV(self, cv: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractCV", args={
+            "cv": cv,
         }, mode="stream")
         return result
     def ExtractJobDescription(self, job: str,
@@ -224,13 +271,6 @@ class BamlHttpStreamRequestClient:
     ) -> baml_py.baml_py.HTTPRequest:
         result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractJobDescription", args={
             "job": job,
-        }, mode="stream")
-        return result
-    def ExtractResume(self, resume: str,
-        baml_options: BamlCallOptions = {},
-    ) -> baml_py.baml_py.HTTPRequest:
-        result = self.__options.merge_options(baml_options).create_http_request_sync(function_name="ExtractResume", args={
-            "resume": resume,
         }, mode="stream")
         return result
     

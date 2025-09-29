@@ -1,0 +1,25 @@
+enum document_status {
+  "queued"
+  "finished"
+}
+
+Table document {
+    id uuid [primary key]
+    cv_filename string 
+    cv_path string
+    project_filename string
+    project_path string
+    status document_status
+    created_at timestamptz
+    updated_at timestamptz
+}
+
+Table result {
+    id uuid [primary key]
+    name string
+    evaluation_result json
+    created_at timestamptz
+    updated_at timestamptz
+}
+
+ref: document.id - result.id

@@ -24,23 +24,29 @@ class LlmResponseParser:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def EvaluateResume(
+    def EvaluateAll(
         self, llm_response: str, baml_options: BamlCallOptions = {},
-    ) -> types.EvaluationResult:
-        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateResume", llm_response=llm_response, mode="request")
-        return typing.cast(types.EvaluationResult, result)
+    ) -> types.OverallResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateAll", llm_response=llm_response, mode="request")
+        return typing.cast(types.OverallResult, result)
+
+    def EvaluateProject(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> types.ProjectEvaluationResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateProject", llm_response=llm_response, mode="request")
+        return typing.cast(types.ProjectEvaluationResult, result)
+
+    def ExtractCV(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> types.CVExtractionResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractCV", llm_response=llm_response, mode="request")
+        return typing.cast(types.CVExtractionResult, result)
 
     def ExtractJobDescription(
         self, llm_response: str, baml_options: BamlCallOptions = {},
     ) -> types.JobDescription:
         result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractJobDescription", llm_response=llm_response, mode="request")
         return typing.cast(types.JobDescription, result)
-
-    def ExtractResume(
-        self, llm_response: str, baml_options: BamlCallOptions = {},
-    ) -> types.Resume:
-        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractResume", llm_response=llm_response, mode="request")
-        return typing.cast(types.Resume, result)
 
     
 
@@ -50,22 +56,28 @@ class LlmStreamParser:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def EvaluateResume(
+    def EvaluateAll(
         self, llm_response: str, baml_options: BamlCallOptions = {},
-    ) -> stream_types.EvaluationResult:
-        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateResume", llm_response=llm_response, mode="stream")
-        return typing.cast(stream_types.EvaluationResult, result)
+    ) -> stream_types.OverallResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateAll", llm_response=llm_response, mode="stream")
+        return typing.cast(stream_types.OverallResult, result)
+
+    def EvaluateProject(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> stream_types.ProjectEvaluationResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="EvaluateProject", llm_response=llm_response, mode="stream")
+        return typing.cast(stream_types.ProjectEvaluationResult, result)
+
+    def ExtractCV(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> stream_types.CVExtractionResult:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractCV", llm_response=llm_response, mode="stream")
+        return typing.cast(stream_types.CVExtractionResult, result)
 
     def ExtractJobDescription(
         self, llm_response: str, baml_options: BamlCallOptions = {},
     ) -> stream_types.JobDescription:
         result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractJobDescription", llm_response=llm_response, mode="stream")
         return typing.cast(stream_types.JobDescription, result)
-
-    def ExtractResume(
-        self, llm_response: str, baml_options: BamlCallOptions = {},
-    ) -> stream_types.Resume:
-        result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractResume", llm_response=llm_response, mode="stream")
-        return typing.cast(stream_types.Resume, result)
 
     

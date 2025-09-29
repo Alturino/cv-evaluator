@@ -23,25 +23,21 @@ class StreamState(BaseModel, typing.Generic[StreamStateValueT]):
     value: StreamStateValueT
     state: typing_extensions.Literal["Pending", "Incomplete", "Complete"]
 # #########################################################################
-# Generated classes (7)
+# Generated classes (8)
 # #########################################################################
+
+class CVExtractionResult(BaseModel):
+    name: typing.Optional[str] = None
+    address: typing.Optional[str] = None
+    projects: typing.List["Project"]
+    educations: typing.List["Education"]
+    experience: typing.List["Experience"]
+    skills: typing.List[str]
 
 class Education(BaseModel):
     school: typing.Optional[str] = None
     gpa: typing.Optional[float] = None
     max_gpa: typing.Optional[float] = None
-
-class EvaluationResult(BaseModel):
-    cv_match_rate: typing.Optional[float] = None
-    cv_feedback: typing.Optional[str] = None
-    project_score: typing.Optional[float] = None
-    project_feedback: typing.Optional[str] = None
-    overall_summary: typing.Optional[str] = None
-    technical_skills_match: typing.Optional["SkillResult"] = None
-    experience_level: typing.Optional["SkillResult"] = None
-    project_match: typing.Optional["SkillResult"] = None
-    relevant_achievements: typing.Optional["SkillResult"] = None
-    cultural_fit: typing.Optional["SkillResult"] = None
 
 class Experience(BaseModel):
     company: typing.Optional[str] = None
@@ -59,6 +55,18 @@ class JobDescription(BaseModel):
     tools: typing.List[str]
     real_work_examples: typing.List[str]
 
+class OverallResult(BaseModel):
+    cv_match_rate: typing.Optional[float] = None
+    cv_feedback: typing.Optional[str] = None
+    project_score: typing.Optional[float] = None
+    project_feedback: typing.Optional[str] = None
+    overall_summary: typing.Optional[str] = None
+    technical_skills_match: typing.Optional["SkillResult"] = None
+    experience_level: typing.Optional["SkillResult"] = None
+    project_match: typing.Optional["SkillResult"] = None
+    relevant_achievements: typing.Optional["SkillResult"] = None
+    cultural_fit: typing.Optional["SkillResult"] = None
+
 class Project(BaseModel):
     name: typing.Optional[str] = None
     description: typing.Optional[str] = None
@@ -66,13 +74,14 @@ class Project(BaseModel):
     tools: typing.List[str]
     duration_in_year: typing.Optional[float] = None
 
-class Resume(BaseModel):
-    name: typing.Optional[str] = None
-    address: typing.Optional[str] = None
-    projects: typing.List["Project"]
-    educations: typing.List["Education"]
-    experience: typing.List["Experience"]
-    skills: typing.List[str]
+class ProjectEvaluationResult(BaseModel):
+    overall: typing.Optional[float] = None
+    correctness: typing.Optional[float] = None
+    code_quality: typing.Optional[float] = None
+    resilience: typing.Optional[float] = None
+    documentation: typing.Optional[float] = None
+    creativity_and_bonus: typing.Optional[float] = None
+    feedback: typing.Optional[str] = None
 
 class SkillResult(BaseModel):
     score: typing.Optional[int] = None
